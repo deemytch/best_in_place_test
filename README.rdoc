@@ -1,28 +1,12 @@
-== README
+==  setup
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+    rake db:migrate db:seed
+    rails s
 
-Things you may want to cover:
+== use
 
-* Ruby version
+Then click to rollout tree at the right side and click any dish
 
-* System dependencies
+Dish edit view will be loaded with ajax
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+`:place_holders` are not working, but all other functionality of `best_in_place` - does
