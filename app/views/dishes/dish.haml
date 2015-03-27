@@ -1,0 +1,39 @@
+.jumbotron{ style: 'padding: 2em;'}
+  .row
+    .col-md-6
+      .thumbnail
+    .col-md-6
+      .row#dish_price_container
+        .col-md-6.dish_price
+          =best_in_place @dish, :price, url: "/dishes/#{@dish.id}", place_holder: '9999', value: @dish.price, :display_with => lambda{|p| raw("#{p}<span class='rouble_sym'>₽</span>")}, data: { id: @dish.id, field: :price, bip: { place_holder: 0 } }
+        .col-md-6
+          =best_in_place @dish, :available, as: :checkbox, collection: [raw('<span class="label label-default"><span class="glyphicon glyphicon-eye-close"></span></span>'), raw('<span class="label label-success"><span class="glyphicon glyphicon-eye-open"></span></span>')], data: { id: @dish.id, field: :available }
+          -unless @dish.nil?
+            %span.btn.btn-danger.btn-sm{ data: { remotebtn: 'true', method: :delete, url: "/dishes/#{@dish.id}" }}
+              %span.glyphicon.glyphicon-trash
+
+      %h2.h2#dish_name
+        =best_in_place @dish, :name, url: "/dishes/#{@dish.id}", :'place_holder' => 'Имя, сестра!', value: @dish.name, data: { id: @dish.id, field: :name }
+      .row
+        .col-sm-12
+          %h4.h4 Описание:
+          =best_in_place @dish, :descr, url: "/dishes/#{@dish.id}", :'place_holder' => 'Нужно описание', value: @dish.descr, :as => :textarea, data: { field: :descr, id: @dish.id }
+          %br/
+          %br/
+          #dish_info
+            арт.№
+            =best_in_place @dish, :code, url: "/dishes/#{@dish.id}", :place_holder => 'Артикул?', value: @dish.code
+
+  .row
+    .col-md-10
+      %h4.h4 Включено в списки:
+      %ul.list-group
+        -unless @dish.id.nil?
+          %li.list-group-item
+            =@dish.cuisine.name
+            %button.btn.btn-danger.btn-xs.pull-right{ data: { remotebtn: 'true', method: :delete, url: dish_path(@dish) }}
+              .glyphicon.glyphicon-remove
+
+    .col-md-2{ style: 'padding: 4em 0 0;'}
+      %button.btn.btn-warning.btn-lg.center-block
+        .glyphicon.glyphicon-link

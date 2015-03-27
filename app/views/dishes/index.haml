@@ -1,0 +1,16 @@
+.container#dishes_page
+  .row
+    .col-md-2
+      -# =render 'pagination'
+    .col-md-1
+    .col-md-2
+    .col-md-7
+      -# =render partial: "application/flashes", flash: flash
+  .row
+    .col-md-8#dish_edit_form
+    .col-md-4#tree_list
+      =render 'tree_list'
+
+=content_for :action_js do
+  =javascript_include_tag 'best_in_place'
+  =javascript_include_tag 'dish_index'

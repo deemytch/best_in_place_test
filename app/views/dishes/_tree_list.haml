@@ -1,0 +1,18 @@
+%h3.h3 Кухни
+.row
+  .col-md-12
+    #festival_tree
+      %ul
+        -@cuisines.each do |cuisine|
+          %li{ data: {id: cuisine.id, t: 'cuisine', jstree: '{"icon":"/assets/jstree-cuisine.png"}'}}
+            =cuisine.name
+            %ul
+              -cuisine.dishes.each do |dish|
+                -koler = dish.available ? 'text-success' : 'text-muted'
+                %li{ data: {id: dish.id, t: 'dish', jstree: "{'icon':'/assets/jstree-dish.png'}" }, class: koler }
+                  =dish.name
+              %li{ data: {id: 'new', t: 'dish'}}
+                .glyphicon.glyphicon-plus
+            %li{ data: {id: 'new', t: 'cuisine'}}
+              .glyphicon.glyphicon-plus
+       
