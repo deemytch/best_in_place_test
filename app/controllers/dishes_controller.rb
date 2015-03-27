@@ -1,4 +1,5 @@
 class DishesController < ApplicationController
+  include ApplicationHelper
   before_action :set_dish, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -18,6 +19,16 @@ class DishesController < ApplicationController
   end
 
   def update
+    @dish.update_attributes(dish_params)
+    if @dish.save
+      EM.run{
+        faye_client.publish("/menu", { cmd: 'update', dish: @dish })
+      }
+    end
+    respond_to do |f|
+      f.html {render :edit, layout: !request.xhr?}
+      f.json { respond_with_bip(@dish) }
+    end
   end
 
   private

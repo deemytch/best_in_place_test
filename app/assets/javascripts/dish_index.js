@@ -5,7 +5,7 @@ var rtypes = { 'dish': 'dishes', 'section': 'sections', 'cuisine': 'cuisines', '
 $(document).ready(function(){
   // подгоняем размер списка под окно
   $('#tree_list').innerHeight(window.innerHeight - 80);
-  $(".best_in_place").best_in_place();
+  $('.best_in_place').best_in_place();
 
   $(window).on('resize orientationChanged', function() {
     $('#tree_list').innerHeight(window.innerHeight - 80);
@@ -35,7 +35,7 @@ $(document).ready(function(){
   });
 
   // после редактирования сервер отсылает новые данные на канале /dishes/restaurant.code cmd:update, dish: @dish
-  var menu_channel = faye_client().subscribe('/menu/'+rcode, function(msg){
+  var menu_channel = faye_client().subscribe('/menu', function(msg){
     if(msg['cmd'] == 'update'){
       $('#festival_tree').jstree('rename_node', '[data-id="'+msg.dish.id+'"]', msg.dish.name);
       if(msg.dish.available){
