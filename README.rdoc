@@ -9,4 +9,4 @@ Then click to rollout tree at the right side and click any dish
 
 Dish edit view will be loaded with ajax
 
-`:place_holders` are not working, but all other functionality of `best_in_place` - does
+*:place_holders* are not working, but all other functionality of *best_in_place* - does
